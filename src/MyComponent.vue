@@ -2,11 +2,15 @@
   <div>
     <h1>{{title}}</h1>
 
-    <div>{{task1}}</div>
-    <div>{{task2}}</div>
+    <h2>Pending tasks</h2>
+    <div class="tasks-container">
+      <div v-for="task in pendingTasks" v-bind:key="task.id">{{task.name}}</div>
+    </div>
 
-    <p>Towns I've visited</p>
-    <div v-for="city in cities" v-bind:key="city">{{city}}</div>
+    <h2>Finished tasks</h2>
+    <div class="tasks-container">
+      <div v-for="finishedTask in finishedTasks" v-bind:key="finishedTask.id">{{finishedTask.name}}</div>
+    </div>
   </div>
 </template>
 
@@ -16,9 +20,11 @@ export default {
   data() {
     return {
       title: "ToDo Application",
-      task1: "Call dad",
-      task2: "Buy tickets",
-      cities: ["New York", "Paris", "Berlin"]
+      pendingTasks: [
+        { id: 1, name: "Call dad", isFinished: false },
+        { id: 2, name: "Buy tickets", isFinished: false }
+      ],
+      finishedTasks: [{ id: 3, name: "BDay party", isFinished: true }]
     };
   }
 };
