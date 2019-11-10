@@ -3,7 +3,7 @@
     <h1>{{title}}</h1>
     <div class="new-task">
       New task:
-      <input type="text" />
+      <input type="text" v-model="newTaskName" />
       <button>Add task</button>
     </div>
     <h2>Pending tasks</h2>
@@ -17,7 +17,7 @@
     <h2>Finished tasks</h2>
     <div class="tasks-container finished">
       <div v-for="finishedTask in finishedTasks" v-bind:key="finishedTask.id">
-        <input type="checkbox" />
+        <input type="checkbox" v-model="finishedTask.isFinished" />
         {{finishedTask.name}}
       </div>
     </div>
@@ -34,7 +34,8 @@ export default {
         { id: 1, name: "Call dad", isFinished: false },
         { id: 2, name: "Buy tickets", isFinished: false }
       ],
-      finishedTasks: [{ id: 3, name: "BDay party", isFinished: true }]
+      finishedTasks: [{ id: 3, name: "BDay party", isFinished: true }],
+      newTaskName: ""
     };
   }
 };
