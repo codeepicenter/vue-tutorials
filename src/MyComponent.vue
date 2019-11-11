@@ -4,7 +4,7 @@
     <div class="new-task">
       New task:
       <input type="text" v-model="newTaskName" />
-      <button>Add task</button>
+      <button @click="addNewTask()">Add task</button>
     </div>
     <h2>Pending tasks</h2>
     <div class="tasks-container">
@@ -37,6 +37,18 @@ export default {
       finishedTasks: [{ id: 3, name: "BDay party", isFinished: true }],
       newTaskName: ""
     };
+  },
+  methods: {
+    addNewTask() {
+      let newTask = {
+        id: Math.random() * 10000,
+        name: this.newTaskName,
+        isFinished: false
+      };
+
+      this.pendingTasks.push(newTask);
+      this.newTaskName = "";
+    }
   }
 };
 </script>
