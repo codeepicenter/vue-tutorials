@@ -9,7 +9,7 @@
     <h2>Pending tasks</h2>
     <div class="tasks-container">
       <div v-for="task in pendingTasks" v-bind:key="task.id">
-        <input type="checkbox" />
+        <input type="checkbox" @change="markTaskAsCompleted(task)" />
         {{task.name}}
       </div>
     </div>
@@ -17,7 +17,11 @@
     <h2>Finished tasks</h2>
     <div class="tasks-container finished">
       <div v-for="finishedTask in finishedTasks" v-bind:key="finishedTask.id">
-        <input type="checkbox" v-model="finishedTask.isFinished" />
+        <input
+          type="checkbox"
+          v-model="finishedTask.isFinished"
+          @change="markTaskAsNotCompleted(finishedTask)"
+        />
         {{finishedTask.name}}
       </div>
     </div>
@@ -48,6 +52,18 @@ export default {
 
       this.pendingTasks.push(newTask);
       this.newTaskName = "";
+    },
+    markTaskAsCompleted(clickedTask) {
+      clickedTask.isFinished = true;
+      this.pendingTasks = this.pendingTasks.filter(t => t.id != clickedTask.id);
+      this.finishedTasks.push(clickedTask);
+    },
+    markTaskAsNotCompleted(clickedTask) {
+      clickedTask.isFinished = false;
+      this.finishedTasks = this.finishedTasks.filter(
+        t => t.id != clickedTask.id
+      );
+      this.pendingTasks.push(clickedTask);
     }
   }
 };
